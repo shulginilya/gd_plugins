@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "@/appStore/store";
+import { PluginItemType } from "@/types";
 
 interface initialStateType {
-    pluginsData: string[];
+    pluginsData: PluginItemType[];
 };
 
 const initialState: initialStateType = {
