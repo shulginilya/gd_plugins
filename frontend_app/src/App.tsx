@@ -5,7 +5,9 @@ const App = () => (
 	<>
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<PluginsContainer />} />
+				<Route path="/" element={<PluginsContainer />}>
+					<Route path="/:plugin_id" element={<PluginsContainer />} />
+				</Route>
 			</Routes>
 		</BrowserRouter>
 	</>
