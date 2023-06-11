@@ -3,7 +3,7 @@ import pluginsReducer from "@/appStore/reducers/pluginSlice";
 
 export const store = configureStore({
     reducer: {
-        plugins: pluginsReducer,
+        tabs: pluginsReducer,
     },
 });
 

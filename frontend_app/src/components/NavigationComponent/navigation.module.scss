@@ -1,3 +1,11 @@
 .navigation {
     display: block;
+    .navigation__list {
+        &__item {
+            &__link {
+                &__icon {}
+            }
+        }
+        &__item_active {}
+    }
 }

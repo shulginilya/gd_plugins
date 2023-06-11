@@ -1,13 +1,14 @@
-export interface PluginItemType {
+export interface PluginType {
     id: string;
     title: string;
     description: string;
+    enabled: boolean;
+    active: boolean;
 };
 
 export interface TabType {
+    id: string;
     title: string;
     icon: string;
-    active: PluginItemType[];
-    disabled: PluginItemType[];
-    inactive: PluginItemType[];
+    plugins: PluginType[];
 };

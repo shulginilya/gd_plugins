@@ -3,5 +3,5 @@ interface CommonConfigType {
 };
 
 export const commonConfig: CommonConfigType = {
-    apiEndpoint: 'https://localhost:3000'
+    apiEndpoint: 'http://localhost:3000'
 };

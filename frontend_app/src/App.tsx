@@ -6,7 +6,7 @@ const App = () => (
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<PluginsContainer />}>
-					<Route path="/:plugin_id" element={<PluginsContainer />} />
+					<Route path="/:current_tab_id" element={<PluginsContainer />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
