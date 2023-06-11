@@ -1,4 +1,4 @@
-import styles from './enable_plugins.module.scss';
+import styles from './plugins_listing.module.scss';
 
 const PluginsListingComponent: React.FC = () => {
 	return (

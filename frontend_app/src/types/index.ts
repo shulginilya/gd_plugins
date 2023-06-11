@@ -1,4 +1,5 @@
 export interface PluginItemType {
+    id: string;
     title: string;
     description: string;
 };
