@@ -1,7 +1,7 @@
 {
 	"name": "gd_plugins_frontend",
 	"scripts": {
-		"dev": "vite",
+		"start": "vite",
 		"build": "tsc && vite build",
 		"serve": "vite preview",
 		"lint:fix:eslint": "eslint --ignore-path .lintignore --fix .",
