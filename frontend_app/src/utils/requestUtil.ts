@@ -5,8 +5,12 @@ type MethodType = 'GET' | 'PUT';
 
 interface MakeRequestType {
     url: string;
-    params?: PluginTypeEditableType;
+    params?: PluginTypeEditableType | PluginEnabilityType;
     method?: MethodType;
+};
+
+interface PluginEnabilityType {
+    enable: boolean;
 };
 
 interface OptionsType {

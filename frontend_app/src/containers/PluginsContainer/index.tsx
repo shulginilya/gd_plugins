@@ -10,6 +10,7 @@ import {
 	selectData,
 	fetchPlugins,
 	modifyPlugin,
+	togglePluginsEnalability,
 	Status
 } from "@/appStore/reducers/pluginSlice";
 import {
@@ -48,7 +49,11 @@ const PluginsContainer: React.FC = () => {
 	const modifyPluginItem = async (data: ModifyPluginType) => {
 		await dispatch(modifyPlugin(data));
 	};
-	/*
+	const enablePluginsHandler = async () => {
+		const isAlreadyEnabled = plugins.every(p => p.enabled);
+		await dispatch(togglePluginsEnalability());
+	};
+ 	/*
 		Render our template
 	*/
 	const renderPluginsList = (): ReactNode => {
@@ -85,7 +90,10 @@ const PluginsContainer: React.FC = () => {
 					tabs={tabs}
 					current_tab_id={current_tab_id}
 				/>
-				<EnablePluginsComponent plugins={plugins} />
+				<EnablePluginsComponent
+					enablePluginsHandler={enablePluginsHandler}
+					plugins={plugins}
+				/>
 			</aside>
 			<div className={styles.plugins_container__content}>
 				{renderPluginsList()}

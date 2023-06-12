@@ -74,6 +74,17 @@ export const modifyPlugin = createAsyncThunk('plugins/modifyPlugin', async (data
 });
 
 /*
+    Enable / disabled all of the plugins
+*/
+export const togglePluginsEnalability = createAsyncThunk('plugins/enablePlugins', async () => {
+    const pluginsData = await makeRequest({
+        url: '/plugins/changeEnability',
+        method: 'PUT'
+    });
+    return pluginsData;
+});
+
+/*
     Slice definition
 */
 export const pluginSlice = createSlice({
@@ -103,13 +114,17 @@ export const pluginSlice = createSlice({
                 state.status = Status.failed;
                 state.error = 'api error';
             })
-            .addCase(modifyPlugin.fulfilled, (state, action) => {
+            .addCase(modifyPlugin.fulfilled, (state, action: PayloadAction<ModifyPluginType>) => {
                 const updatedPlugin = action.payload;
                 const {id, ...rest} = updatedPlugin;
                 const pluginKey = state.plugins.findIndex(p => p.id === id);
                 if (pluginKey > -1) {
                     state.plugins[pluginKey] = Object.assign({}, state.plugins[pluginKey], rest);
                 }
+            })
+            .addCase(togglePluginsEnalability.fulfilled, (state, action) => {
+                const updatedPlugins = action.payload;
+                state.plugins = updatedPlugins;
             })
     }
 });

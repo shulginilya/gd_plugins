@@ -1,6 +1,7 @@
 {
     "name": "gd_plugins-json-server",
     "scripts": {
+        "server": "node ./src/server.js",
         "start": "json-server --watch db.json"
     },
     "devDependencies": {

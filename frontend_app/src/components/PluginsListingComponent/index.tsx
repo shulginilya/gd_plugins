@@ -31,20 +31,29 @@ const PluginsListingComponent: React.FC<NavigationComponentType> = ({
             <div className={styles.plugins_listing__wrap}>
                 {
                     plugins.map(plugin => {
-                        const toggleClass = plugin?.active ? 'toggle__switch toggle__switch_active' : 'toggle__switch';
+                        const toggleClassArray = ['toggle__switch'];
+                        if (plugin?.active) {
+                            toggleClassArray.push('toggle__switch_active');
+                        }
+                        if (!plugin?.enabled) {
+                            toggleClassArray.push('toggle__switch_disabled');
+                        }
+                        const toggleClass = toggleClassArray.join(' ');
                         const toggleText = plugin?.active ? 'Allowed' : 'Blocked';
+                        const isDisabled = !plugin?.enabled;
+                        const pluginListingItemClass = isDisabled ? `${styles.plugins_listing__item} ${styles.plugins_listing__item_disabled}` : styles.plugins_listing__item;
                         return (
                             <div
                                 key={plugin?.id}
                                 className={styles.plugins_listing__item_wrap}
                             >
                                 <div
-                                    className={styles.plugins_listing__item}
+                                    className={pluginListingItemClass}
                                 >
                                     <p className={styles.plugins_listing__item__title}>{plugin?.title}</p>
                                     <p className={styles.plugins_listing__item__desc}>{plugin?.description}</p>
                                     <div
-                                        onClick={() => modifyPluginItemHandler(plugin)}
+                                        onClick={isDisabled ? undefined : () => modifyPluginItemHandler(plugin)}
                                         className={styles.plugins_listing__item__toggle}
                                     >
                                         <div className={toggleClass}>

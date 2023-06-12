@@ -44,4 +44,7 @@ $toggle-track-transition: 0.3s;
             left: $toggle-width - $toggle-height + ($toggle-height - $toggle-handle-size) / 2;
         }
     }
+    &.toggle__switch_disabled {
+        cursor: text;
+    }
 }
