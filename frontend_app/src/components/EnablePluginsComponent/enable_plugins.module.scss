@@ -1,12 +1,15 @@
 @use '@/styles/variables' as *;
 
 .enable_plugins {
-    position: absolute;
+    position: static;
     display: flex;
     width: 100%;
     justify-content: center;
     left: 0px;
     bottom: 0px;
+    @media (min-width: $min-screen-xxs) {
+        position: absolute;
+    }
     &__inside {
         display: flex;
         padding-bottom: 15px;

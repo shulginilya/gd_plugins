@@ -1,14 +1,21 @@
 @use '@/styles/variables' as *;
 
 .plugins_container {
-    display: flex;
+    display: block;
     height: 100%;
+
+    @media (min-width: $min-screen-xxs) {
+        display: flex;
+    }
 
     &__navi {
         position: relative;
-        width: 260px;
+        width: 100%;
         background-color: $grey;
         flex: 0 0 auto;
+        @media (min-width: $min-screen-xxs) {
+            width: 260px;
+        }
     }
 
     &__content {

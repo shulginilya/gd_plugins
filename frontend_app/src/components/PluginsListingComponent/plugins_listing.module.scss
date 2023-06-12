@@ -13,8 +13,14 @@
         margin-left: -7.5px;
     }
     &__item_wrap {
-        width: 33.3333333%;
+        width: 100%;
         padding: 7.5px;
+        @media (min-width: $min-screen-sm) {
+            width: 50%;
+        }
+        @media (min-width: $min-screen-md) {
+            width: 33.3333333%;
+        }
     }
     &__item {
         position: relative;
