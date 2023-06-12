@@ -8,6 +8,7 @@ import { RootState } from "@/appStore/store";
 import {
     TabType,
     PluginType,
+    ModifyPluginType,
 } from "@/types";
 
 /*
@@ -60,16 +61,25 @@ export const fetchPlugins = createAsyncThunk('plugins/fetchPlugins', async () =>
 });
 
 /*
+    We modify plguin
+*/
+export const modifyPlugin = createAsyncThunk('plugins/modifyPlugin', async (data: ModifyPluginType) => {
+    const {id, params} = data;
+    const pluginsData = await makeRequest({
+        url: `/plugins/${id}`,
+        params,
+        method: 'PUT'
+    });
+    return pluginsData;
+});
+
+/*
     Slice definition
 */
 export const pluginSlice = createSlice({
     name: "tabs",
     initialState,
-    reducers: {
-        mutatePlugin: (state) => {
-            console.log('state: ', state);
-        }
-    },
+    reducers: {},
     extraReducers(builder) {
         builder
             .addCase(fetchPlugins.pending, (state) => {
@@ -93,12 +103,16 @@ export const pluginSlice = createSlice({
                 state.status = Status.failed;
                 state.error = 'api error';
             })
+            .addCase(modifyPlugin.fulfilled, (state, action) => {
+                const updatedPlugin = action.payload;
+                const {id, ...rest} = updatedPlugin;
+                const pluginKey = state.plugins.findIndex(p => p.id === id);
+                if (pluginKey > -1) {
+                    state.plugins[pluginKey] = Object.assign({}, state.plugins[pluginKey], rest);
+                }
+            })
     }
 });
-
-export const {
-    mutatePlugin
-} = pluginSlice.actions;
 
 export const selectData = (state: RootState) => state.tabs;
 

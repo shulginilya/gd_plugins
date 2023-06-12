@@ -1,15 +1,16 @@
+import { PluginTypeEditableType } from '@/types';
 import { commonConfig } from '@/configs/common';
+
+type MethodType = 'GET' | 'PUT';
 
 interface MakeRequestType {
     url: string;
-    params?: {
-        [key: string]: string
-    };
-    method?: 'GET' | 'POST';
+    params?: PluginTypeEditableType;
+    method?: MethodType;
 };
 
 interface OptionsType {
-    method: 'GET' | 'POST';
+    method: MethodType;
     headers?: {
         [key: string]: string
     },
@@ -24,7 +25,7 @@ export const makeRequest = async ({
     const options: OptionsType = {
         method
     };
-    if (method === 'POST') {
+    if (method === 'PUT') {
         options.headers = {
             "Content-Type": "application/json"
         };

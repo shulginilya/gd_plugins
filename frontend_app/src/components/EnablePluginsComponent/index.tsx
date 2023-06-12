@@ -11,7 +11,6 @@ const EnablePluginsComponent: React.FC<EnablePluginsComponentType> = ({
     const isEnabled = plugins.every(p => p.enabled);
     const toggleClass = isEnabled ? 'toggle__switch toggle__switch_active' : 'toggle__switch';
     const enablePluginsClass = isEnabled ? `${styles.enable_plugins} ${styles.enable_plugins__enabled}` : styles.enable_plugins;
-    console.log('enablePluginsClass: ', enablePluginsClass);
 	return (
         <div className={enablePluginsClass}>
             <div className={styles.enable_plugins__inside}>

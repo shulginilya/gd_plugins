@@ -1,5 +1,8 @@
-export interface PluginType {
+export interface PluginType extends PluginTypeEditableType {
     id: string;
+};
+
+export interface PluginTypeEditableType {
     title: string;
     description: string;
     enabled: boolean;
@@ -12,4 +15,9 @@ export interface TabType {
         icon: string;
         plugins: string[];
     };
+};
+
+export interface ModifyPluginType {
+    id: string,
+    params: PluginTypeEditableType
 };

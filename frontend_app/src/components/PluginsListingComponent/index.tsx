@@ -1,15 +1,30 @@
-import { PluginType } from '@/types';
+import {
+    PluginType,
+    ModifyPluginType,
+} from '@/types';
 import styles from './plugins_listing.module.scss';
 
 interface NavigationComponentType {
     plugins: (PluginType | null)[];
     title: string;
+    modifyPluginItem: (data: ModifyPluginType) => void
 };
 
 const PluginsListingComponent: React.FC<NavigationComponentType> = ({
     plugins,
-    title
+    title,
+    modifyPluginItem
 }) => {
+    const modifyPluginItemHandler = (plugin: PluginType | null) => {
+        if (plugin) {
+            const {id, ...rest} = plugin;
+            rest.active = !rest.active;
+            modifyPluginItem({
+                id,
+                params: rest
+            });
+        }
+    };
 	return (
         <>
             <p className={styles.plugins_listing__title}>{title}</p>
@@ -28,7 +43,10 @@ const PluginsListingComponent: React.FC<NavigationComponentType> = ({
                                 >
                                     <p className={styles.plugins_listing__item__title}>{plugin?.title}</p>
                                     <p className={styles.plugins_listing__item__desc}>{plugin?.description}</p>
-                                    <div className={styles.plugins_listing__item__toggle}>
+                                    <div
+                                        onClick={() => modifyPluginItemHandler(plugin)}
+                                        className={styles.plugins_listing__item__toggle}
+                                    >
                                         <div className={toggleClass}>
                                             <span className="toggle__switch__text">{toggleText}</span>
                                         </div>

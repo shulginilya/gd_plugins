@@ -9,8 +9,12 @@ import { useAppSelector, useAppDispatch } from "@/appStore/hooks";
 import {
 	selectData,
 	fetchPlugins,
+	modifyPlugin,
 	Status
 } from "@/appStore/reducers/pluginSlice";
+import {
+    ModifyPluginType,
+} from "@/types";
 import { useParams } from 'react-router-dom';
 import styles from './plugins_container.module.scss';
 
@@ -39,6 +43,12 @@ const PluginsContainer: React.FC = () => {
 		}
 	}, [status, dispatch]);
 	/*
+		Modify plugin
+	*/
+	const modifyPluginItem = async (data: ModifyPluginType) => {
+		await dispatch(modifyPlugin(data));
+	};
+	/*
 		Render our template
 	*/
 	const renderPluginsList = (): ReactNode => {
@@ -57,6 +67,7 @@ const PluginsContainer: React.FC = () => {
 				return (
 					<PluginsListingComponent
 						plugins={listingPlugins}
+						modifyPluginItem={modifyPluginItem}
 						title={`${tabs[current_tab_id].title} Plugins`}
 					/>
 				)
