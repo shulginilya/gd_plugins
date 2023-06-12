@@ -11,7 +11,7 @@ const EnablePluginsComponent: React.FC<EnablePluginsComponentType> = ({
     enablePluginsHandler
 }) => {
     const isEnabled = plugins.every(p => p.enabled);
-    const toggleClass = isEnabled ? 'toggle__switch toggle__switch_active' : 'toggle__switch';
+    const toggleClass = isEnabled ? 'alt_toggle_switch alt_toggle_switch_active' : 'alt_toggle_switch';
     const enablePluginsClass = isEnabled ? `${styles.enable_plugins} ${styles.enable_plugins__enabled}` : styles.enable_plugins;
     const text = isEnabled ? 'enabled' : 'disabled';
 	return (

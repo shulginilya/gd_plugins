@@ -42,3 +42,30 @@
         cursor: text;
     }
 }
+
+.alt_toggle_switch {
+    position: relative;
+    width: 50px;
+    height: 32px;
+    background-color: $red;
+    border-radius: 19.5px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:before {
+        content: '';
+        position: absolute;
+        top: 3.5px;
+        left: 4.5px;
+        width: 24px;
+        height: 24px;
+        background-color: $white;
+        border-radius: 50%;
+        transition: 0.3s;
+    }
+    &.alt_toggle_switch_active {
+        background-color: $green;
+        &:before {
+            left: 23.5px;
+        }
+    }
+}
