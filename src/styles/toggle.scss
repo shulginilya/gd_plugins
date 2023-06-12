@@ -1,17 +1,11 @@
-$toggle-width: 50px;
-$toggle-height: 25px;
-$toggle-handle-size: 20px;
-$toggle-handle-transition: 0.3s;
-$toggle-track-transition: 0.3s;
-
 .toggle__switch {
     position: relative;
-    width: $toggle-width;
-    height: $toggle-height;
+    width: 50px;
+    height: 25px;
     background-color: $red;
-    border-radius: $toggle-height / 2;
+    border-radius: 12.5px;
     cursor: pointer;
-    transition: $toggle-track-transition;
+    transition: 0.3s;
 
     &__text {
         font-size: 11px;
@@ -26,13 +20,13 @@ $toggle-track-transition: 0.3s;
     &:before {
         content: '';
         position: absolute;
-        top: ($toggle-height - $toggle-handle-size) / 2;
-        left: ($toggle-height - $toggle-handle-size) / 2;
-        width: $toggle-handle-size;
-        height: $toggle-handle-size;
+        top: 2.5px;
+        left: 2.5px;
+        width: 20px;
+        height: 20px;
         background-color: $white;
         border-radius: 50%;
-        transition: $toggle-handle-transition;
+        transition: 0.3s;
     }
 
     &.toggle__switch_active {
@@ -41,7 +35,7 @@ $toggle-track-transition: 0.3s;
             color: $green;
         }
         &:before {
-            left: $toggle-width - $toggle-height + ($toggle-height - $toggle-handle-size) / 2;
+            left: 27.5px;
         }
     }
     &.toggle__switch_disabled {
