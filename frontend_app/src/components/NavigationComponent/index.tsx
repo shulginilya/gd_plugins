@@ -3,7 +3,7 @@ import styles from './navigation.module.scss';
 import { Link } from 'react-router-dom';
 
 interface NavigationComponentType {
-    tabs: TabType[];
+    tabs: TabType;
     current_tab_id: string | undefined;
 };
 
@@ -12,36 +12,34 @@ const NavigationComponent: React.FC<NavigationComponentType> = ({
     current_tab_id
 }) => {
 	return (
-        <div className={styles.navigation}>
-            <ul className={styles.navigation__list}>
-                {
-                    tabs.map(t => {
-                        const navigationItemClass = current_tab_id === t.id ? `${styles.navigation__list__item} ${styles.navigation__list__item_active}` : styles.navigation__list__item;
-                        return (
-                            <li
-                                key={t.id}
-                                className={navigationItemClass}
+        <ul className={styles.navigation}>
+            {
+                Object.keys(tabs).map(key => {
+                    const navigationItemClass = current_tab_id === key ? `${styles.navigation__item} ${styles.navigation__item_active}` : styles.navigation__item;
+                    return (
+                        <li
+                            key={key}
+                            className={navigationItemClass}
+                        >
+                            <Link
+                                className={styles.navigation__item__link}
+                                to={`/${key}`}
                             >
-                                <Link
-                                    className={styles.navigation__list__item__link}
-                                    to={`/${t.id}`}
-                                >
-                                    {
-                                        t.icon && (
-                                            <img
-                                                className={styles.navigation__list__item__link__icon}
-                                                src={`/images/${t.icon}.png`}
-                                            />
-                                        )
-                                    }
-                                    {t.title}
-                                </Link>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        </div>
+                                {
+                                    tabs[key].icon && (
+                                        <img
+                                            className={styles.navigation__item__link__icon}
+                                            src={`images/${tabs[key].icon}.png`}
+                                        />
+                                    )
+                                }
+                                <span className={styles.navigation__item__link__text}>{tabs[key].title}</span>
+                            </Link>
+                        </li>
+                    )
+                })
+            }
+        </ul>
 	)
 };
 

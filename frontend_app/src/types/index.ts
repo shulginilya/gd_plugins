@@ -7,8 +7,9 @@ export interface PluginType {
 };
 
 export interface TabType {
-    id: string;
-    title: string;
-    icon: string;
-    plugins: PluginType[];
+    [key: string]: {
+        title: string;
+        icon: string;
+        plugins: string[];
+    };
 };

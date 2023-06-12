@@ -21,31 +21,30 @@ export enum Status {
 };
 const PLUGINS_PER_TAB = 6;
 interface initialStateType {
-    data: TabType[],
+    tabs: TabType,
+    plugins: PluginType[],
     status: Status.idle | Status.loading | Status.succeeded | Status.failed,
     error: string | null;
 };
 const initialState: initialStateType = {
-    data: [
-        {
-            id: "marketing",
+    tabs: {
+        'marketing': {
             title: "Marketing",
             icon: "icon-marketing",
             plugins: []
         },
-        {
-            id: "finance",
+        'finance': {
             title: "Finance",
             icon: "icon-finance",
             plugins: []
         },
-        {
-            id: "personnel",
+        'personnel': {
             title: "Personnel",
             icon: "icon-people",
             plugins: []
         }
-    ],
+    },
+    plugins: [],
     status: Status.idle,
     error: null
 };
@@ -79,16 +78,15 @@ export const pluginSlice = createSlice({
             .addCase(fetchPlugins.fulfilled, (state, action: PayloadAction<PluginType[]>) => {
                 state.status = Status.succeeded;
                 const plugins = action.payload;
+                state.plugins = plugins;
                 // distributing logic of the plugins among the tabs
+                const tabKeys = Object.keys(state.tabs);
                 const numberOfIterations = Math.ceil(plugins.length/PLUGINS_PER_TAB);
                 for (let i = 0 ; i < numberOfIterations; i++) {
                     const startSlice = PLUGINS_PER_TAB * i;
                     const endSlice = startSlice + PLUGINS_PER_TAB;
-                    if (i === numberOfIterations - 1) {
-                        state.data[i].plugins = plugins.slice(startSlice);
-                    } else {
-                        state.data[i].plugins = plugins.slice(startSlice, endSlice);
-                    }
+                    const pluginsToAdd = (i === numberOfIterations - 1) ? plugins.slice(startSlice) : plugins.slice(startSlice, endSlice);
+                    state.tabs[tabKeys[i]].plugins = pluginsToAdd.map(t => t.id);
                 }
             })
             .addCase(fetchPlugins.rejected, (state) => {

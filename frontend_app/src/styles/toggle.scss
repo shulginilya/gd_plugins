@@ -1,0 +1,47 @@
+$toggle-width: 50px;
+$toggle-height: 25px;
+$toggle-handle-size: 20px;
+$toggle-handle-transition: 0.3s;
+$toggle-track-transition: 0.3s;
+
+.toggle__switch {
+    position: relative;
+    width: $toggle-width;
+    height: $toggle-height;
+    background-color: $red;
+    border-radius: $toggle-height / 2;
+    cursor: pointer;
+    transition: $toggle-track-transition;
+
+    &__text {
+        font-size: 11px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding-top: 27px;
+        color: $red;
+        font-weight: 600;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: ($toggle-height - $toggle-handle-size) / 2;
+        left: ($toggle-height - $toggle-handle-size) / 2;
+        width: $toggle-handle-size;
+        height: $toggle-handle-size;
+        background-color: $white;
+        border-radius: 50%;
+        transition: $toggle-handle-transition;
+    }
+
+    &.toggle__switch_active {
+        background-color: $green;
+        .toggle__switch__text {
+            color: $green;
+        }
+        &:before {
+            left: $toggle-width - $toggle-height + ($toggle-height - $toggle-handle-size) / 2;
+        }
+    }
+}

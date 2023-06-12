@@ -20,14 +20,16 @@ const PluginsContainer: React.FC = () => {
 		Retrieve state data from the redux
 	*/
 	const {
-		data,
+		tabs,
+		plugins,
 		status,
 		error
 	} = useAppSelector(selectData);
 	/*
 		Retrieve current tab id from the router
 	*/
-	const { current_tab_id } = useParams();
+	const { tab_id } = useParams();
+	const current_tab_id = tab_id || Object.keys(tabs)[0];
 	/*
 		Initial load of plugins data
 	*/
@@ -42,16 +44,25 @@ const PluginsContainer: React.FC = () => {
 	const renderPluginsList = (): ReactNode => {
 		switch(status) {
 			case Status.loading: return (
-				<div>loading spinner</div>
+				<div className={styles.loader_spinner}></div>
 			)
-			case Status.succeeded: return (
-				<PluginsListingComponent
-					tabs={data}
-					current_tab_id={current_tab_id}
-				/>
-			)
+			case Status.succeeded: {
+				const listingPlugins = tabs[current_tab_id].plugins.map(plugin_id => {
+					const k = plugins.findIndex(pl => pl.id === plugin_id);
+					if (k > -1) {
+						return plugins[k];
+					}
+					return null;
+				}).filter(p => p !== null);
+				return (
+					<PluginsListingComponent
+						plugins={listingPlugins}
+						title={`${tabs[current_tab_id].title} Plugins`}
+					/>
+				)
+			}
 			case Status.failed: return (
-				<div>error message</div>
+				<div className={styles.errors}>{error}</div>
 			)
 		}
 	};
@@ -60,10 +71,10 @@ const PluginsContainer: React.FC = () => {
 			<aside className={styles.plugins_container__navi}>
 				<LogoComponent />
 				<NavigationComponent
-					tabs={data}
+					tabs={tabs}
 					current_tab_id={current_tab_id}
 				/>
-				<EnablePluginsComponent />
+				<EnablePluginsComponent plugins={plugins} />
 			</aside>
 			<div className={styles.plugins_container__content}>
 				{renderPluginsList()}
