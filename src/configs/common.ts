@@ -3,5 +3,5 @@ interface CommonConfigType {
 };
 
 export const commonConfig: CommonConfigType = {
-    apiEndpoint: 'https://gdjsonserver.herokuapp.com'
+    apiEndpoint: 'http://localhost:3000'
 };

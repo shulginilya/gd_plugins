@@ -34,7 +34,7 @@ const PluginsContainer: React.FC = () => {
 		Retrieve current tab id from the router
 	*/
 	const { tab_id } = useParams();
-	const current_tab_id = tab_id || Object.keys(tabs)[0];
+	const current_tab_id = (tab_id && tabs[tab_id]) ? tab_id : Object.keys(tabs)[0];
 	/*
 		Initial load of plugins data
 	*/
@@ -50,7 +50,6 @@ const PluginsContainer: React.FC = () => {
 		await dispatch(modifyPlugin(data));
 	};
 	const enablePluginsHandler = async () => {
-		const isAlreadyEnabled = plugins.every(p => p.enabled);
 		await dispatch(togglePluginsEnalability());
 	};
  	/*
